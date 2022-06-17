@@ -1,0 +1,14 @@
+.textOne {
+  text-align: center;
+  color: gray;
+  font-size: small;
+}
+
+.textTwo {
+  text-align: center;
+  font-size: 9px;
+}
+.card2 {
+  margin-top: 2%;
+  height: 5vh;
+}
