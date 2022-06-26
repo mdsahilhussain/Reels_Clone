@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { database, storage } from "../../fireBase";
 
 import { AuthContext } from "../../Context/AuthContext";
-import insta from "../../Assets/insta.png";
+// import insta from "../../Assets/insta.png";
 import instalogo from "../../Assets/Instagram.jpg";
 
 import "./signup.css";
@@ -35,7 +35,7 @@ export default function Signup() {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { signup } = useContext(AuthContext);
 
   const handleClick = async () => {
@@ -51,6 +51,7 @@ export default function Signup() {
       setLoading(true);
       let userObj = await signup(email, password);
       let uid = userObj.user.uid;
+      // console.log(uid);
       const uploadTask = storage.ref(`/users/${uid}/ProfileImage`).put(file);
       uploadTask.on("state_changed", fn1, fn2, fn3);
       function fn1(snapshot) {
@@ -77,7 +78,7 @@ export default function Signup() {
           });
         });
         setLoading(false);
-        history.push("/");
+        navigate("/", { replace: true });
       }
     } catch (err) {
       setError(err);
@@ -137,7 +138,12 @@ export default function Signup() {
               component="label"
             >
               Upload Profile Image
-              <input type="file" accept="image/*" hidden onChange={(e)=>setFile(e.target.files[0])}/>
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </Button>
           </CardContent>
           <CardActions>

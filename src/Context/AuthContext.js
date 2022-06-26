@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../fireBase";
-export const AuthContext = React.createContext();
 
+export const AuthContext = React.createContext();
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
